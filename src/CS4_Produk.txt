@@ -1,0 +1,50 @@
+P001;Celana Panjang XL hitam;123 456 789;Pria
+P002;Celana Panjang L hitam;123 456 790;Pria
+P003;Celana Panjang M hitam;123 456 791;Pria
+P004;Celana Panjang S hitam;123 456 792;Pria
+P005;Blous XL biru;123 456 793;Wanita
+P006;Blous L biru;123 456 794;Wanita
+P007;Blous M biru;123 456 795;Wanita
+P008;Blous S biru;123 456 796;Wanita
+P009;Baju bayi cars M;123 456 797;Bayi
+P010;Baju bayi cars S;123 456 798;Bayi
+P011;Kaos Distro Lengan Pendek;123 456 799;Pria
+P012;Kemeja Flanel;123 456 800;Pria
+P013;T-shirt Distro;125 400 100;Pria
+P014;Kaos Style Korea;125 400 101;Pria
+P015;Highwaist Loose Jeans;125 400 102;Wanita
+P016;Vintage baggy denim jacket;125 400 103;Wanita
+P017;Kaos polos cotton;125 400 104;Wanita
+P018;Daster panjang;125 400 105;Wanita
+P019;Jumper Bayi Sleepsuit;125 400 106;Bayi
+P020;Baju Bayi 3 in 1;125 400 107;Bayi
+P021;Little Q Polos;125 400 108;Bayi
+P022;Velvet Junior;125 400 109;Bayi
+P023;Celana Panjang Jogger Motif;125 400 110;Bayi
+P024;Setelan Avisa 6-18 bulan;125 400 111;Bayi
+P025;Kaos Bombogie;125 400 112;Pria
+P026;Kaos Polos O neck;125 400 113;Pria
+P027;Baju Danilo M;125 400 114;Pria
+P028;Baju Danilo L;125 400 115;Pria
+P029;Kaos T-Shirt Bear X Yellow;125 400 116;Pria
+P030;Blazer Edition Premium;125 400 117;Wanita
+P031;Batik Atasan;125 400 118;Wanita
+P032;Crop Top Etnik Batik;125 400 119;Wanita
+P033;Kemeja Hawai Polos;125 400 120;Wanita
+P034;Kaos polos catton;111 500 100;Wanita
+P035;Masker Bayi dan Balita;111 500 101;Bayi
+P036;Setelan rompi baby colin;111 500 102;Bayi
+P037;Daster Yukensi Bayi;111 500 103;Bayi
+P038;Pajamas Sunday Bayi;111 500 104;Bayi
+P039;Chuba Chups Set;111 500 105;Bayi
+P040;Yuzu Blouse katun;111 500 106;Wanita
+P041;Candy Pink Marled Cotton;111 500 107;Wanita
+P042;Kaos Beige Mocca Katun;111 500 108;Wanita
+P043;Benhill Celana Panjang;111 500 109;Wanita
+P044;Blouse katun Rami Bangkok;111 500 110;Wanita
+P045;Kaos Croptee katun;111 500 111;Wanita
+P046;Kaos Luffy One Piece;111 500 112;Pria
+P047;Baju Pantai;111 500 113;Pria
+P048;Baju Barong;111 500 114;Pria
+P049;Baju Koko;111 500 115;Pria
+P050;Kaos Anime Tokyo;111 500 116;Pria
