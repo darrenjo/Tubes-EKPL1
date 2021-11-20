@@ -1,124 +1,78 @@
-import javax.tools.JavaFileManager;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.FileNotFoundException;
+import java.io.*;
+//import java.io.FileNotFoundException;
+import java.util.*;
+//import java.util.Scanner;
 
-public class test {
-    private String idwarehouse;
-    private String namawarehouse;
-    private String alamatwarehouse;
-    private String proID;
-    private String proNama;
-    private String partnumber;
-    private String jenisproduk;
-    private String unitCost;
-    private String sisaStock;
-    private String wareID;
-    private String wareName;
-    private String wareAlamat;
+public class Test {
+    private final ArrayList<Product> products = new ArrayList<>();
+    private final ArrayList<Warehouse> warehouses = new ArrayList<>();
 
+    public void readInputFile() throws FileNotFoundException {
 
-    Produk produk = new Produk(proID, proNama, partnumber, jenisproduk);
+        File inputFile = new File("CS4_Warehouse.txt");
+        Scanner scannerInputWarehouse = new Scanner(inputFile);
 
-    Inventory inventory = new Inventory(wareID,proID,unitCost,sisaStock);
-    warehouse1 warehouse = new warehouse1(wareID, wareName, wareAlamat);
-
-    private ArrayList < Produk > produklist = new ArrayList();
-    private ArrayList < warehouse1 > warelist = new ArrayList();
-
-    public void readinput()throws IOException{
-        File inputWare = new File("E:\\YH\\ITHB\\Semester 3\\Elemen Konstruksi Perangkat Lunak I (3)\\Tugas\\src\\CS4_Warehouse.txt");
-        File inputInvet = new File("E:\\YH\\ITHB\\Semester 3\\Elemen Konstruksi Perangkat Lunak I (3)\\Tugas\\src\\CS4_Inventory.txt");
-        File inputProd = new File("E:\\YH\\ITHB\\Semester 3\\Elemen Konstruksi Perangkat Lunak I (3)\\Tugas\\src\\CS4_Produk.txt");
-
-        //scanner
-        Scanner readWare = new Scanner (inputWare);
-        while (readWare.hasNextLine()) {
-            String []warehouse = readWare.nextLine().split(";");
-            idwarehouse = warehouse[0];
-            namawarehouse = warehouse[1];
-            alamatwarehouse = warehouse[2];
-            System.out.println( "ID Warehouse       : "+idwarehouse+"\n"+
-                                "Nama Warehouse     : "+namawarehouse+"\n"+
-                                "Alamat Warehouse   : "+alamatwarehouse+"\n"+"\n");
-            String file = readWare.nextLine();
-            System.out.println(file);
+        while (scannerInputWarehouse.hasNextLine()) { //Selama ada baris selanjutnya, dia TRUE
+            String[] wh = scannerInputWarehouse.nextLine().split(";"); //pemisah ";" gk tau penting apa ngga
+            warehouses.add(new Warehouse(wh[0],wh[1],wh[2])); //add ke dalam arraylist + constructor
         }
-        readWare.close();
+        scannerInputWarehouse.close();
 
-        Scanner readProd = new Scanner (inputProd);
-        while (readProd.hasNextLine()) {
-            String []produk = readProd.nextLine().split(";");
-            proID = produk [0];
-            proNama = produk [1];
-            partnumber= produk [2];
-            jenisproduk = produk [3];
-            System.out.println( "ID Product    : "+proID+"\n"+
-                                "Nama Product  : "+proNama+"\n"+
-                                "Angka Product : "+partnumber+"\n"+
-                                "Jenis Product : "+jenisproduk+"\n"+"\n");
-            String file = readProd.nextLine();
-            System.out.println(file);
-        }
-        readProd.close();
+        File inputProduct = new File("CS4_Produk.txt");
+        Scanner scannerInputProduct = new Scanner(inputProduct);
 
-        Scanner readInvet = new Scanner (inputInvet);
-        while (readInvet.hasNextLine()) {
-            String []inventory = readInvet.nextLine().split(";");
-            idwarehouse = inventory[0];
-            proID = inventory[1];
-            unitCost = inventory[2];
-            sisaStock = inventory[3];
-            System.out.println("ID warehouse  : "+idwarehouse+"\n"+
-                               "ID Product    : "+proID+"\n"+
-                               "Harga         : "+unitCost+"\n"+
-                               "Sisa barang   : "+sisaStock+"\n"+"\n");
-            String file = readInvet.nextLine();
-            System.out.println(file);
+        File inputInventory = new File("CS4_Inventory.txt");
+        Scanner scannerInputInventory = new Scanner(inputInventory);
+
+        while (scannerInputProduct.hasNextLine()) {
+            String[] pd = scannerInputProduct.nextLine().split(";"); //gk tau penting apa ngga
+            String[] iv = scannerInputInventory.nextLine().split(";"); //gk tau penting apa ngga
+            double a = Double.parseDouble(iv[2]);
+            int b = Integer.parseInt(iv[3]);
+            products.add(new Inventory(pd[0], pd[1], pd[2], pd[3], iv[0], iv[1], a, b)); //add ke dalam arraylist + constructor
         }
-        readInvet.close();
+        scannerInputProduct.close();
+        scannerInputInventory.close();
     }
 
-    //print
-    public void display() throws Exception{
-        readinput();
+    public void tampilanMainMenu() throws FileNotFoundException {
+        readInputFile();
+        Menu menu = new Menu(warehouses, products);
+        System.out.println(" ");
+        System.out.println("+=============================================+");
+        System.out.println("|                 MINI MARKET                 |");
+        System.out.println("|                  MAIN MENU                  |");
+        System.out.println("+=============================================+");
+        System.out.println("1. Read Data");
+        System.out.println("2. Manage");
+        System.out.println("3. Transaction");
+        System.out.println("0. Exit");
+        System.out.print("Input menu: ");
+        Scanner input = new Scanner(System.in);
+        String inMenu = input.next();
+        System.out.println(" ");
 
-        //while true
-        //pilihannya pakai if else
-        // untuk memberhenttikannya pke break
-        // dikasih apakah user mau menyimpan perubahan datanya
-        // cara panggil fungsi di class lain
-        System.out.println("===============================");
-    }
-
-    public void ifelseMenuAwal() {
-        System.out.print(
-                "=========================================\n" +
-                        "  Welcome to OMIRAQI's Furniture Store!\n" +
-                        "=========================================\n" +
-                        "Choose the menu !\n" +
-                        "1. View\n" +
-                        "2. Add/Edit/Delete\n" +
-                        "9. Exit\n");
-        Scanner pilihanUser = new Scanner(System.in);
-        System.out.print("Your Choice : ");
-        String choise = pilihanUser.nextLine();
-
-        if (choise == 1) {
-
+        //cari tau fungsi equalsIgnoreCase
+        if (inMenu.equalsIgnoreCase("1")){
+            menu.tampilanMenu();
+        }
+        else if (inMenu.equalsIgnoreCase("2")){
+            menu.tampilanMenuManage();
+        }
+        else if (inMenu.equalsIgnoreCase("3")){
+            menu.tampilanMenuTransaksi();
+        }
+        else if (inMenu.equalsIgnoreCase("0")){
+            System.out.println("Process End!");
+        }
+        else{
+            System.out.println("Wrong input! *try 0,1,...");
+            tampilanMainMenu();
         }
     }
 
-
-    public static void main(String[] args) throws IOException {
-        test testMethod = new test();
-        testMethod.readinput();
-//        Test = new Test();
-//        b.manipulateString(b.getInputString());
-//        System.out.println(inputUserWH());
-//        inputUserWH();
-
+    public static void main(String[] args) throws FileNotFoundException {
+        Test x = new Test();
+        x.tampilanMainMenu();
     }
 }
