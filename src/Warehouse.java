@@ -1,32 +1,23 @@
 public class Warehouse {
-    private final String WarehouseId;
+    private final String WarehouseID;
     private final String WarehouseName;
-    private final String WarehouseAdress;
+    private final String WarehouseAddress;
 
-    public Warehouse(String warehouseId, String warehouseName, String warehouseAdress) {
-        WarehouseId = warehouseId;
+    public Warehouse(String warehouseID, String warehouseName, String warehouseAddress) {
+        WarehouseID = warehouseID;
         WarehouseName = warehouseName;
-        WarehouseAdress = warehouseAdress;
-    }
-
-    @Override
-    public String toString() {
-        return "Warehouse{" +
-                "WarehouseId='" + WarehouseId + '\'' +
-                ", WarehouseName='" + WarehouseName + '\'' +
-                ", WarehouseAdress='" + WarehouseAdress + '\'' +
-                '}';
+        WarehouseAddress = warehouseAddress;
     }
 
     public String getWarehouseId() {
-        return WarehouseId;
+        return WarehouseID;
     }
 
     public String getWarehouseName() {
         return WarehouseName;
     }
 
-    public String getWarehouseAdress() {
-        return WarehouseAdress;
+    public String getWarehouseAddress() {
+        return WarehouseAddress;
     }
 }

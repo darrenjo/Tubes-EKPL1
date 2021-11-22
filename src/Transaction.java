@@ -1,84 +1,91 @@
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Transaction {
-    ArrayList<Warehouse> warehouses;
-    ArrayList<Product> products;
+    ArrayList<Warehouse>warehouses;
+    ArrayList<Product>products;
 
-    public Transaction(ArrayList<Warehouse> warehouses, ArrayList<Product> products) {
+    public Transaction(ArrayList<Warehouse>warehouses, ArrayList<Product>products) {
         this.warehouses = warehouses;
         this.products = products;
     }
 
-    public int getInventoryinProduct(ArrayList<Product> products, String pID, String wID){
-        int index=-1;
-        for (int i=0; i<products.size();++i){
+    public int indexInventoryProductList(ArrayList<Product>products, String pID, String wID){
+        int listIndexNumber = -1;
+        for (int i = 0; i < products.size(); ++i){
             Product inventory = products.get(i);
 
-            if(pID.equalsIgnoreCase(inventory.getProductId2()) && wID.equalsIgnoreCase(inventory.getWarehouseId2())){
-                index=i;
+            if(pID.equalsIgnoreCase(inventory.productIDInventory()) && wID.equalsIgnoreCase(inventory.warehouseIDFromProduct())){
+                listIndexNumber=i;
                 break;
             }
         }
-        return index;
+        return listIndexNumber;
     }
 
 
-    public void addProduct(ArrayList<Product> products) throws FileNotFoundException {
+    public void addProduct(ArrayList<Product>products) throws FileNotFoundException {
         Read readData = new Read(warehouses, products);
-        Scanner in = new Scanner(System.in);
-        System.out.print("Insert Warehouse ID: ");
-        String Wh_id=in.nextLine();
-        System.out.print("Insert Product ID: ");
-        String pd_id = in.nextLine();
-        int index = getInventoryinProduct(products, pd_id,Wh_id) ;
-        if (index >= 0) {
-            System.out.println("Warehouse and product exist.");
-            System.out.print("Insert the amount of unit to be add: ");
-            int jumlah = in.nextInt();
-            products.set(index, new Inventory(products.get(index).getProductId(), products.get(index).getProductName(), products.get(index).getSupplier(), products.get(index).getProductType(), products.get(index).getWarehouseId2(), products.get(index).getProductId2(), products.get(index).getPrice(), products.get(index).getUnit()+jumlah));
 
-            readData.readDataInventory();
+        Scanner in = new Scanner(System.in);
+        System.out.print("Masukan ID warehouse  : ");
+        String Wh_id=in.nextLine();
+        System.out.print("Masukan ID product    : ");
+        String pd_id = in.nextLine();
+
+        int listIndexNumber = indexInventoryProductList(products, pd_id,Wh_id) ;
+        if (listIndexNumber >= 0) {
+            System.out.println( "Produk atau Warehouse tersedia\n"+
+                                "Masukkan jumlah unit yang akan ditambah : ");
+            int jumlah = in.nextInt();
+            products.set(listIndexNumber, new Inventory(products.get(listIndexNumber).productID(), products.get(listIndexNumber).productName(), products.get(listIndexNumber).productNumber(),
+                    products.get(listIndexNumber).productType(), products.get(listIndexNumber).warehouseIDFromProduct(), products.get(listIndexNumber).productIDInventory(),
+                    products.get(listIndexNumber).productPrice(), products.get(listIndexNumber).productUnit()+jumlah));
+
+            readData.readInventoryData();
             PrintWriter out = new PrintWriter("CS4_Inventory.txt");
             for (int i = 0; i < products.size(); ++i) {
                 Product Inventory2 = products.get(i);
-                out.println(Inventory2.getWarehouseId2() + ";" + Inventory2.getProductId2()+ ";" + Inventory2.getPrice()+";"+Inventory2.getUnit());
+                out.println(Inventory2.warehouseIDFromProduct() + ";" + Inventory2.productIDInventory()+ ";" + Inventory2.productPrice()+";"+Inventory2.productUnit());
             }
             out.close();
         }else{
-            System.out.println("Warehouse or product didn't exist.");
+            System.out.println("Maaf Produk atau Warehouse tidak tersedia");
         }
     }
 
-    public void reduceProduct(ArrayList<Product> products) throws FileNotFoundException {
+    public void deleteProduct(ArrayList<Product>products) throws FileNotFoundException {
         Read readData = new Read(warehouses, products);
         Scanner in = new Scanner(System.in);
-        System.out.print("Insert warehouse ID: ");
-        String Wh_id=in.nextLine();
-        System.out.print("Insert product ID: ");
-        String pd_id = in.nextLine();
-        int index = getInventoryinProduct(products, pd_id,Wh_id) ;
-        if (index >= 0) {
-            System.out.println("Warehouse and product exist.");
-            System.out.print("Insert the amount of unit to be reduce: ");
-            int jumlah = in.nextInt();
-            if(jumlah > products.get(index).getUnit()){
-                System.out.println("Insufficient stock");
-            }else {
-            products.set(index, new Inventory(products.get(index).getProductId(), products.get(index).getProductName(), products.get(index).getSupplier(), products.get(index).getProductType(), products.get(index).getWarehouseId2(), products.get(index).getProductId2(), products.get(index).getPrice(), products.get(index).getUnit()-jumlah));
 
-            readData.readDataInventory();
+        System.out.print("Masukan ID warehouse  : ");
+        String Wh_id=in.nextLine();
+        System.out.print("Masukan ID product    : ");
+        String pd_id = in.nextLine();
+
+        int index = indexInventoryProductList(products, pd_id,Wh_id) ;
+
+        if (index >= 0) {
+            System.out.println( "Produk atau Warehouse tersedia\n"+
+                                "Masukkan jumlah unit yang akan dikurangi : ");
+            int amountDelete = in.nextInt();
+            if(amountDelete > products.get(index).productUnit()){
+                System.out.println("Stok sudah habis");
+            }else {
+            products.set(index, new Inventory(products.get(index).productID(), products.get(index).productName(), products.get(index).productNumber(),
+                    products.get(index).productType(), products.get(index).warehouseIDFromProduct(), products.get(index).productIDInventory(),
+                    products.get(index).productPrice(), products.get(index).productUnit()-amountDelete));
+
+            readData.readInventoryData();
             PrintWriter out = new PrintWriter("CS4_Inventory.txt");
             for (int i = 0; i < products.size(); ++i) {
                 Product Inventory2 = products.get(i);
-                out.println(Inventory2.getWarehouseId2() + ";" + Inventory2.getProductId2()+ ";" + Inventory2.getPrice()+";"+Inventory2.getUnit());
+                out.println(Inventory2.warehouseIDFromProduct() + ";" + Inventory2.productIDInventory()+ ";" + Inventory2.productPrice()+";"+Inventory2.productUnit());
             }
             out.close();
             }
         }else{
-            System.out.println("Warehouse or product didn't exist.");
+            System.out.println("Maaf Produk atau Warehouse tidak tersedia");
         }
     }
 }

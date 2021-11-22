@@ -1,83 +1,44 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 public class Read {
-    private final ArrayList<Warehouse> warehouses;
-    private final ArrayList<Product> products;
+    private final ArrayList<Warehouse>warehouses;
+    private final ArrayList<Product>products;
 
-    public Read(ArrayList<Warehouse> warehouses, ArrayList<Product> products) {
+    public Read(ArrayList<Warehouse>warehouses, ArrayList<Product>products) {
         this.warehouses = warehouses;
         this.products = products;
     }
 
-    public void readDataWarehouse() {
-        System.out.println("+==============================================+");
-        System.out.println("|                WAREHOUSE LIST                |");
-        System.out.println("+==============================================+");
-        System.out.println(" ");
-        for (int i = 0; i <= warehouses.size() - 1; i++) { //menampilkan dari index 0 sampai index size-1
-            Warehouse warehouse = warehouses.get(i);
-            System.out.println("Warehouse ID       : " + warehouse.getWarehouseId());
-            System.out.println("Warehouse Name     : " + warehouse.getWarehouseName());
-            System.out.println("Warehouse Address  : " + warehouse.getWarehouseAdress());
-            System.out.println(" ");
+    public void readInventoryData() {
+        System.out.println("    ~~~~           DAFTAR INVENTORY         ~~~~\n");
+        for (int i = 0; i <= products.size() - 1; i++) {
+            Product pro = products.get(i);
+            System.out.println("ID Produk          : " + pro.productID()+"\n"+
+                                "ID Warehouse       : " + pro.warehouseIDFromProduct()+"\n"+
+                                "Harga              : Rp" + pro.productPrice()+"\n"+
+                                "Persediaan         : " + pro.productUnit() + " pcs\n");
         }
     }
 
-    public void readDataInventory() {
-        System.out.println("+==============================================+");
-        System.out.println("|                INVENTORY LIST                |");
-        System.out.println("+==============================================+");
-        System.out.println(" ");
-        for (int i = 0; i <= products.size() - 1; i++) { //menampilkan dari index 0 sampai index size-1
-            Product product = products.get(i);
-            System.out.println("Product ID    : " + product.getProductId());
-            System.out.println("Warehouse ID  : " + product.getWarehouseId2());
-            System.out.println("Unit Cost     : Rp" + product.getPrice());
-            System.out.println("Stock         : " + product.getUnit() + " unit");
-            System.out.println(" ");
-        }
-    }
-
-    public void readDataProduct() {
-        System.out.println("+==============================================+");
-        System.out.println("|                 PRODUCT LIST                 |");
-        System.out.println("+==============================================+");
-        System.out.println(" ");
-        for (int i = 0; i <= products.size() - 1; i++) { //menampilkan dari index 0 sampai index size-1
-            Product product = products.get(i);
-            System.out.println("Product ID         : " + product.getProductId());
-            System.out.println("Warehouse ID       : " + product.getWarehouseId2());
-            System.out.println("Product Name       : " + product.getProductName());
-            System.out.println("Part Number        : " + product.getSupplier());
-            System.out.println("Product Type       : " + product.getProductType());
-            System.out.println("Unit Cost          : Rp" + product.getPrice());
-            System.out.println("Stock              : " + product.getUnit() + " unit");
-            System.out.println("");
-        }
-    }
-
-    public void readSpecifiedWarehouse() {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Specific Warehouse ID: ");
-        String IDwarehouse = input.next();
-        System.out.println(" ");
+    public void readWarehouseList() {
         int cekID = 0;
-        System.out.println("+==============================================+");
-        System.out.println("|                WAREHOUSE LIST                |");
-        System.out.println("+==============================================+");
-        System.out.println(" ");
-        for (Product product : products) {
-            String WarehouseID = product.getWarehouseId2();
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("ID Warehouse : ");
+        String IDwarehouse = input.next();
+
+        System.out.println("    ~~~~           DAFTAR WAREHOUSE          ~~~\n");
+        for (Product pro : products) {
+            String WarehouseID = pro.warehouseIDFromProduct();
             if (IDwarehouse.equalsIgnoreCase(WarehouseID)) {
-                System.out.println("Warehouse ID       : " + WarehouseID);
-                System.out.println("Product ID         : " + product.getProductId());
-                System.out.println("Product Name       : " + product.getProductName());
-                System.out.println("Part Number        : " + product.getSupplier());
-                System.out.println("Product Type       : " + product.getProductType());
-                System.out.println("Unit Price         : " + product.getPrice());
-                System.out.println("Stock              : " + product.getUnit() + " unit");
-                System.out.println(" ");
+                System.out.println( "Warehouse ID      : " + WarehouseID+"\n"+
+                                    "Product ID         : " + pro.productID()+"\n"+
+                                    "Product Name       : " + pro.productName()+"\n"+
+                                    "Nomor Produk       : " + pro.productNumber()+"\n"+
+                                    "Jenis Produk       : " + pro.productType()+"\n"+
+                                    "Harga              : " + pro.productPrice()+"\n"+
+                                    "Persediaan         : " + pro.productUnit() + " pcs\n");
                 cekID++;
             }
         }
@@ -85,42 +46,91 @@ public class Read {
             for (Warehouse warehouse : warehouses) {
                 String WarehouseID2 = warehouse.getWarehouseId();
                 if (IDwarehouse.equalsIgnoreCase(WarehouseID2)) {
-                    System.out.println("Warehouse empty.");
+                    System.out.println("Warehouse kosong");
                     cekID++;
                 }
             }
         }
         if (cekID == 0) {
-            System.out.println("Warehouse didn't exist.");
+            System.out.println("Maaf produk tidak tersedia");
         }
     }
 
-    public void readSpecifiedProduct() {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Specific Product ID: ");
-        String IDproduct = input.next();
-        System.out.println(" ");
+    public void readWarehouseData() {
+        System.out.println("    ~~~~           DAFTAR WAREHOUSE          ~~~\n");
+        for (int i = 0; i <= warehouses.size() - 1; i++) {
+            Warehouse ware = warehouses.get(i);
+            System.out.println( "ID Warehouse       : " + ware.getWarehouseId()+"\n"+
+                                "Nama Warehouse     : " + ware.getWarehouseName()+"\n"+
+                                "Alamat Warehouse   : " + ware.getWarehouseAddress()+"\n");
+        }
+    }
+
+    public void readProductList() {
         int cekID = 0;
-        System.out.println("+==============================================+");
-        System.out.println("|                 PRODUCT LIST                 |");
-        System.out.println("+==============================================+");
-        System.out.println(" ");
-        for (Product product : products) {
-            String ProductID = product.getProductId2();
-            if (IDproduct.equalsIgnoreCase(ProductID)) {
-                System.out.println("Product ID        : " + ProductID.toUpperCase());
-                System.out.println("Product Name      : " + product.getProductName());
-                System.out.println("Part Number       : " + product.getSupplier());
-                System.out.println("Product Type      : " + product.getProductType());
-                System.out.println("Unit Cost         : Rp" + product.getPrice());
-                System.out.println("Stock             : " + product.getUnit() + " unit");
-                System.out.println("Warehouse ID      : " + product.getWarehouseId2());
-                System.out.println(" ");
+        Scanner input = new Scanner(System.in);
+
+        System.out.print("ID Produk : ");
+        String IDproduct = input.next();
+        System.out.println("    ~~~~             DAFTAR PRODUk          ~~~~\n");
+        for (Product pro : products) {
+            String ProID = pro.productIDInventory();
+            if (IDproduct.equalsIgnoreCase(ProID)) {
+                System.out.println( "ID Produk         : " + ProID.toUpperCase()+"\n"+
+                                    "Nama Produk       : " + pro.productName()+"\n"+
+                                    "Nomor Produk      : " + pro.productNumber()+"\n"+
+                                    "Jenis Produk      : " + pro.productType()+"\n"+
+                                    "Harga             : Rp " + pro.productPrice()+"\n"+
+                                    "Persediaan        : " + pro.productUnit() + " pcs\n"+
+                                    "ID Warehouse      : " + pro.warehouseIDFromProduct()+"\n");
                 cekID++;
             }
         }
         if (cekID == 0) {
-            System.out.println("Product didn't exist.");
+            System.out.println("Maaf produk tidak tersedia");
         }
     }
+
+    public void readDataProduct() {
+        System.out.println("    ~~~~             DAFTAR PRODUK           ~~~~\n");
+        for (int i = 0; i <= products.size() - 1; i++) {
+            Product pro = products.get(i);
+            System.out.println( "ID Produk          : " + pro.productID()+"\n"+
+                                "ID Warehouse       : " + pro.warehouseIDFromProduct()+"\n"+
+                                "Nama Produk        : " + pro.productName()+"\n"+
+                                "Nomor Produk       : " + pro.productNumber()+"\n"+
+                                "Jenis Produk       : " + pro.productType()+"\n"+
+                                "Harga              : Rp " + pro.productPrice()+"\n"+
+                                "Persediaan         : " + pro.productUnit() + " pcs\n");
+        }
+    }
+
+    public void readMinProduct() throws FileNotFoundException {
+        System.out.println("    ~~~~             DAFTAR PRODUK           ~~~~\n");
+        Collections.sort(products, Product.pQtyDesc);
+        for (Product pro : products) {
+            System.out.println( "ID Produk          : " + pro.productID()+"\n"+
+                    "ID Warehouse       : " + pro.warehouseIDFromProduct()+"\n"+
+                    "Nama Produk        : " + pro.productName()+"\n"+
+                    "Nomor Produk       : " + pro.productNumber()+"\n"+
+                    "Jenis Produk       : " + pro.productType()+"\n"+
+                    "Harga              : Rp " + pro.productPrice()+"\n"+
+                    "Persediaan         : " + pro.productUnit() + " pcs\n");
+        }
+    }
+
+    public void readMaxProduct() throws FileNotFoundException {
+        System.out.println("    ~~~~             DAFTAR PRODUK           ~~~~\n");
+        Collections.sort(products, Product.pQtyAsc);
+        for (Product pro : products) {
+            System.out.println( "ID Produk          : " + pro.productID()+"\n"+
+                    "ID Warehouse       : " + pro.warehouseIDFromProduct()+"\n"+
+                    "Nama Produk        : " + pro.productName()+"\n"+
+                    "Nomor Produk       : " + pro.productNumber()+"\n"+
+                    "Jenis Produk       : " + pro.productType()+"\n"+
+                    "Harga              : Rp " + pro.productPrice()+"\n"+
+                    "Persediaan         : " + pro.productUnit() + " pcs\n");
+        }
+    }
+
 }

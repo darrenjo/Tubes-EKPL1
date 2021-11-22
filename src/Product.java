@@ -1,68 +1,77 @@
-abstract public class Product{
+import java.util.Comparator;
+
+abstract public class Product {
+    private final String productID;
     private final String productName;
-    private final String productId;
-    private final String productId2;
+    private final String productNumber;
     private final String productType;
-    private final String productSupplier;
-    private final double price;
-    private final String warehouseId2;// kenapa warehouse id 2?
-    private final int unit;
+    private final String warehouseIDFromProduct;
+    private final String productIDInventory;
+    private final double productPrice;
+    private final int productUnit;
 
 
-    public Product(String productId, String productName, String productSupplier, String productType, String warehouseId2, String productId2, double price, int unit) {
+    public Product(String productID, String productName, String productNumber,String productType, String warehouseIDFromProduct, String productIDInventory, double productPrice, int productUnit) {
+        this.productID = productID;
         this.productName = productName;
-        this.productId = productId;
-        this.productId2 = productId2;
+        this.productNumber = productNumber;
         this.productType = productType;
-        this.productSupplier = productSupplier;
-        this.price = price;
-        this.warehouseId2 = warehouseId2;
-        this.unit = unit;
+        this.warehouseIDFromProduct = warehouseIDFromProduct;
+
+        this.productPrice = productPrice;
+        this.productUnit = productUnit;
+        this.productIDInventory = productIDInventory;
     }
 
-    public String getProductName() {
-        return productName;
+    public String productID() {
+        return productID;
     }
 
-    public String getProductId() {
-        return productId;
+    public String productIDInventory() {
+        return productIDInventory;
     }
 
-    public String getProductId2() {
-        return productId2;
+    public String warehouseIDFromProduct() {
+        return warehouseIDFromProduct;
     }
 
-    public String getProductType() {
+    public String productType() {
         return productType;
     }
 
-    public String getSupplier() {
-        return productSupplier;
+    public String productName() {
+        return productName;
     }
 
-    public double getPrice() {
-        return price;
+    public String productNumber() {
+        return productNumber;
     }
 
-    public String getWarehouseId2() {
-        return warehouseId2;
+    public double productPrice() {
+        return productPrice;
     }
 
-    public int getUnit() {
-        return unit;
+    public int productUnit() {
+        return productUnit;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productId='" + productId + '\'' +
-                ", productName='" + productName + '\'' +
-                ", productSupplier='" + productSupplier + '\'' +
-                ", productType='" + productType + '\'' +
-                ", warehouseId2='" + warehouseId2 + '\'' +
-                ", productId2='" + productId2 + '\'' +
-                ", price=" + price +
-                ", unit=" + unit +
-                '}';
-    }
+    public static Comparator<Product> pQtyDesc = new Comparator<Product>() {
+        @Override
+        public int compare(Product o1, Product o2) {
+            int pQty1 = o1.productUnit();
+            int pQty2 = o2.productUnit();
+
+            return pQty1-pQty2;
+        }
+    };
+
+    public static Comparator<Product> pQtyAsc = new Comparator<Product>() {
+        @Override
+        public int compare(Product o1, Product o2) {
+            int pQty1 = o1.productUnit();
+            int pQty2 = o2.productUnit();
+
+            return pQty2 - pQty1;
+        }
+    };
 }
