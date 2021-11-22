@@ -1,0 +1,48 @@
+P001;Celana Panjang XL hitam;123 456 789;PRIA
+P002;Celana Panjang L hitam;123 456 790;PRIA
+P003;Celana Panjang M hitam;123 456 791;PRIA
+P004;Celana Panjang S hitam;123 456 792;PRIA
+P005;Blous XL biru;123 456 793;WANITA
+P006;Blous L biru;123 456 794;WANITA
+P007;Blous M biru;123 456 795;WANITA
+P008;Blous S biru;123 456 796;WANITA
+P010;Baju bayi cars S;123 456 798;BAYI
+P011;Kaos Distro Lengan Pendek;123 456 799;PRIA
+P012;Kemeja Flanel;123 456 800;PRIA
+P013;T-shirt Distro;125 400 100;PRIA
+P014;Kaos Style Korea;125 400 101;PRIA
+P015;Highwaist Loose Jeans;125 400 102;WANITA
+P016;Vintage baggy denim jacket;125 400 103;WANITA
+P017;Kaos polos cotton;125 400 104;WANITA
+P018;Daster panjang;125 400 105;WANITA
+P019;Jumper Bayi Sleepsuit;125 400 106;BAYI
+P020;Baju Bayi 3 in 1;125 400 107;BAYI
+P021;Little Q Polos;125 400 108;BAYI
+P022;Velvet Junior;125 400 109;BAYI
+P023;Celana Panjang Jogger Motif;125 400 110;BAYI
+P024;Setelan Avisa 6-18 bulan;125 400 111;BAYI
+P025;Kaos Bombogie;125 400 112;PRIA
+P026;Kaos Polos O neck;125 400 113;PRIA
+P027;Baju Danilo M;125 400 114;PRIA
+P028;Baju Danilo L;125 400 115;PRIA
+P029;Kaos T-Shirt Bear X Yellow;125 400 116;PRIA
+P030;Blazer Edition Premium;125 400 117;WANITA
+P031;Batik Atasan;125 400 118;WANITA
+P032;Crop Top Etnik Batik;125 400 119;WANITA
+P033;Kemeja Hawai Polos;125 400 120;WANITA
+P034;Kaos polos catton;111 500 100;WANITA
+P035;Masker Bayi dan Balita;111 500 101;BAYI
+P036;Setelan rompi baby colin;111 500 102;BAYI
+P037;Daster Yukensi Bayi;111 500 103;BAYI
+P038;Pajamas Sunday Bayi;111 500 104;BAYI
+P039;Chuba Chups Set;111 500 105;BAYI
+P040;Yuzu Blouse katun;111 500 106;WANITA
+P041;Candy Pink Marled Cotton;111 500 107;WANITA
+P042;Kaos Beige Mocca Katun;111 500 108;WANITA
+P043;Benhill Celana Panjang;111 500 109;WANITA
+P044;Blouse katun Rami Bangkok;111 500 110;WANITA
+P045;Kaos Croptee katun;111 500 111;WANITA
+P046;Kaos Luffy One Piece;111 500 112;PRIA
+P047;Baju Pantai;111 500 113;PRIA
+P048;Baju Barong;111 500 114;PRIA
+P049;Baju Koko;111 500 115;PRIA
